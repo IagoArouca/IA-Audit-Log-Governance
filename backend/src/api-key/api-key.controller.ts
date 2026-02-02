@@ -3,13 +3,12 @@ import { ApiKeysService } from './api-key.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('api-keys')
-@UseGuards(JwtAuthGuard) // Protege todas as rotas deste controller
+@UseGuards(JwtAuthGuard) 
 export class ApiKeysController {
   constructor(private readonly apiKeysService: ApiKeysService) {}
 
   @Post()
   async generate(@Request() req, @Body('name') name: string) {
-    // O req.user.userId vem do JwtStrategy que fizemos!
     return this.apiKeysService.create(req.user.userId, name || 'Nova Chave');
   }
 
