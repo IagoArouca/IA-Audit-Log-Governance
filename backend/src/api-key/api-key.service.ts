@@ -3,7 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { randomBytes } from 'crypto';
 
 @Injectable()
-export class ApiKeyService {
+export class ApiKeysService {
     constructor(private prisma: PrismaService){}
 
     async create(userId: string, name: string) {
