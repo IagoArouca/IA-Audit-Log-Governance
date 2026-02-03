@@ -9,11 +9,11 @@ export class AuditLogsService {
         const stats = await this.prisma.auditLog.aggregate({
             where: { userId },
             _count: {
-                _all: true,                  
-                sensitiveDataFound: true,   
+                _all: true,
+                sensitiveDataFound: true,
             },
             _sum: {
-                cost: true,  
+                cost: true,
             },
         });
 
@@ -22,5 +22,13 @@ export class AuditLogsService {
             totalCost: stats._sum.cost || 0,
             sensitiveDataAlerts: stats._count.sensitiveDataFound || 0,
         };
+    }
+
+    async findAll(userId: string) {
+        return this.prisma.auditLog.findMany({
+            where: { userId },
+            orderBy: { createdAt: 'desc' },
+            take: 20, 
+        });
     }
 }

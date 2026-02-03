@@ -1,73 +1,51 @@
-# React + TypeScript + Vite
+# 🍆 Eggplant Logs | AI Audit Log & Governance Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **O "Cinto de Segurança" para a IA Generativa corporativa.** O **Eggplant Logs** é uma plataforma de governança e auditoria (SaaS B2B) projetada para empresas que utilizam modelos de Inteligência Artificial (OpenAI, Anthropic, etc.), mas precisam de controle total sobre segurança, conformidade (LGPD) e custos.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📋 O Problema que Resolvemos
+Empresas estão integrando IA em seus fluxos, mas enfrentam três grandes desafios:
+1. **Falta de Visibilidade:** Não sabem quem está perguntando o quê para a IA.
+2. **Risco de Conformidade:** Dados sensíveis sendo enviados para modelos públicos.
+3. **Gestão de Custos:** Dificuldade em rastrear o gasto granular por chave de API ou departamento.
 
-## React Compiler
+## 🚀 A Solução
+O Eggplant Logs atua como um **Proxy Inteligente** entre o usuário e o provedor de IA.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Backend (NestJS):** Uma API robusta que intercepta a requisição, valida a presença de dados sensíveis via Regex e Regras Customizadas, registra o log no **PostgreSQL** e gerencia o roteamento para a OpenAI.
+- **Frontend (React):** Um Dashboard de alto nível estilo **SOC (Security Operations Center)** com métricas em tempo real, auditoria detalhada e gestão de chaves.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Stack Tecnológica
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Frontend:** React.js, Tailwind CSS, Lucide Icons, Vite.
+- **Backend:** NestJS (Node.js), Prisma ORM.
+- **Banco de Dados:** PostgreSQL (Agregações nativas para alta performance).
+- **Infraestrutura:** Docker & Docker Compose.
+- **Segurança:** Filtros de sensibilidade de dados e Proxy de chaves de API.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🧠 Diferenciais de Engenharia 
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 📊 Performance & Escalabilidade de Dados
+Diferente de abordagens iniciantes que utilizam `.reduce()` ou `.map()` no Node.js para calcular métricas, o Eggplant Logs delega o trabalho pesado ao **PostgreSQL**.
+- Utilizamos **Agregações de Banco de Dados** (`count`, `sum`, `avg`) para garantir que o dashboard carregue instantaneamente, mesmo com milhões de registros de logs.
+- Implementação de `Promise.all` para chamadas paralelas ao banco, reduzindo o tempo de resposta da API.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 🛡️ Filtro de LGPD & Segurança
+- O sistema analisa o corpo da mensagem antes de enviá-la ao provedor de IA.
+- Se um dado sensível for detectado, o log é marcado com um alerta de risco no dashboard, permitindo auditoria imediata.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 📐 Arquitetura de UI Escalável
+- **Sidebar Navigation:** Escolhida como padrão de ouro para SaaS B2B, permitindo o crescimento horizontal da plataforma (novas funcionalidades como "Políticas de Segurança" ou "Alertas" podem ser adicionadas sem quebrar o layout).
+
+---
+
+## 💻 Como Executar
+
+1. **Clonar o repositório**
+   ```bash
+   git clone [https://github.com/seu-usuario/eggplant-logs.git](https://github.com/seu-usuario/eggplant-logs.git)

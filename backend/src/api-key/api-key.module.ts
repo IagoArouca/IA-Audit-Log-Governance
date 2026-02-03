@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ApiKeyController } from './api-key.controller';
-import { ApiKeyService } from './api-key.service';
+import { ApiKeysController } from './api-key.controller';
+import { ApiKeysService } from './api-key.service';
 
 @Module({
-  controllers: [ApiKeyController],
-  providers: [ApiKeyService]
+  controllers: [ApiKeysController],
+  providers: [ApiKeysService]
 })
 export class ApiKeyModule {}

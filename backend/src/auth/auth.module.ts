@@ -1,16 +1,24 @@
 import { Module } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport'; 
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
+import { JwtStrategy } from './strategies/jwt.strategy'; 
+import { PrismaService } from '../prisma/prisma.service'; 
 
 @Module({
   imports: [
     PassportModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'sentinel-secret-key-2026',
-      signOptions: { expiresIn: '1d' }, // Token vale por 1 dia
+      signOptions: { expiresIn: '1d' }, 
     }),
   ],
-  providers: [AuthService, JwtStrategy, PrismaService], // Adicione o JwtStrategy aqui
+  providers: [
+    AuthService, 
+    JwtStrategy, 
+    PrismaService
+  ],
   controllers: [AuthController],
   exports: [AuthService],
 })
